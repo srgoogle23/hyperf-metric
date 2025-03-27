@@ -65,6 +65,7 @@
     },
     "scripts": {
 	"test": "co-phpunit",
+        "test:filter": "co-phpunit --prepend test/bootstrap.php -c phpunit.xml --colors=always --testdox --filter",
         "test-coverage": "co-phpunit --coverage-clover clover.xml",
         "cs-fix": "php-cs-fixer fix $1",
         "analyse": "phpstan analyse --memory-limit=-1 -l 5 -c phpstan.neon",

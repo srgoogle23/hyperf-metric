@@ -44,9 +44,10 @@ class HttpClientMetricAspect implements AroundInterface
         $method = strtoupper($arguments['keys']['method'] ?? '');
         $uri = $arguments['keys']['uri'] ?? '';
         $host = $base_uri === null ? (parse_url($uri, PHP_URL_HOST) ?? '') : $base_uri->getHost();
+        $uriMask = $this->getUriMask($instance);
         $uri = $this->shouldIgnoreUri($instance)
             ? '<IGNORED>'
-            : SupportUri::sanitize(parse_url($uri, PHP_URL_PATH) ?? '/');
+            : SupportUri::sanitize(parse_url($uri, PHP_URL_PATH) ?? '/', $uriMask);
         $labels = [
             'uri' => $uri,
             'host' => $host,
@@ -96,5 +97,16 @@ class HttpClientMetricAspect implements AroundInterface
     private function shouldIgnoreUri(Client $instance): bool
     {
         return $instance->getConfig('ignore_uri') === true;
+    }
+
+    public function getUriMask(Client $instance): array
+    {
+        $uriMask = $instance->getConfig('uri_mask');
+
+        if (is_array($uriMask) === false) {
+            return [];
+        }
+
+        return $uriMask;
     }
 }
