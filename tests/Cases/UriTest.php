@@ -132,4 +132,20 @@ final class UriTest extends TestCase
         self::assertSame('/v7/test/<E2E-ID>/<E2E-ID>/<E2E-ID>', Uri::sanitize("/v7/test/{$e2eid}/{$e2eid}/{$e2eid}"));
         self::assertSame('/v8/test/<E2E-ID>/<E2E-ID>/<E2E-ID>/', Uri::sanitize("/v8/test/{$e2eid}/{$e2eid}/{$e2eid}/"));
     }
+
+    public function testWithMaskParams(): void
+    {
+        $uriMask = [
+            '/[a-f0-9]+/i' => '/<XPTO>',
+        ];
+
+        self::assertSame('/v1/test', Uri::sanitize('/v1/test'));
+        self::assertSame('/v2/test/<XPTO>', Uri::sanitize('/v2/test/67b5bd9b9f58'));
+        self::assertSame('/v3/test/<XPTO>/bar', Uri::sanitize('/v3/test/67b5bd9b9f58/bar'));
+        self::assertSame('/v4/test/<XPTO>/bar/<XPTO>/', Uri::sanitize('/v4/test/67b5bd9b9f58/bar/67b5bd9b9f58/'));
+        self::assertSame('/v5/test/<XPTO>/<XPTO>', Uri::sanitize('/v5/test/67b5bd9b9f58/67b5bd9b9f58'));
+        self::assertSame('/v6/test/<XPTO>/<XPTO>/', Uri::sanitize('/v6/test/67b5bd9b9f58/67b5bd9b9f58/'));
+        self::assertSame('/v7/test/<XPTO>/<XPTO>/<XPTO>', Uri::sanitize('/v7/test/67b5bd9b9f58/67b5bd9b9f58/6091340d35bc2de'));
+        self::assertSame('/v8/test/<XPTO>/<XPTO>/<XPTO>/', Uri::sanitize('/v8/test/67b5bd9b9f58/67b5bd9b9f58/6091340d35bc2de/'));
+    }
 }
