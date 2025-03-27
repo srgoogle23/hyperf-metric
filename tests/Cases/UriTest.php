@@ -139,13 +139,13 @@ final class UriTest extends TestCase
             '/[a-f0-9]+/i' => '/<XPTO>',
         ];
 
-        self::assertSame('/v1/test', Uri::sanitize('/v1/test'));
-        self::assertSame('/v2/test/<XPTO>', Uri::sanitize('/v2/test/67b5bd9b9f58'));
-        self::assertSame('/v3/test/<XPTO>/bar', Uri::sanitize('/v3/test/67b5bd9b9f58/bar'));
-        self::assertSame('/v4/test/<XPTO>/bar/<XPTO>/', Uri::sanitize('/v4/test/67b5bd9b9f58/bar/67b5bd9b9f58/'));
-        self::assertSame('/v5/test/<XPTO>/<XPTO>', Uri::sanitize('/v5/test/67b5bd9b9f58/67b5bd9b9f58'));
-        self::assertSame('/v6/test/<XPTO>/<XPTO>/', Uri::sanitize('/v6/test/67b5bd9b9f58/67b5bd9b9f58/'));
-        self::assertSame('/v7/test/<XPTO>/<XPTO>/<XPTO>', Uri::sanitize('/v7/test/67b5bd9b9f58/67b5bd9b9f58/6091340d35bc2de'));
-        self::assertSame('/v8/test/<XPTO>/<XPTO>/<XPTO>/', Uri::sanitize('/v8/test/67b5bd9b9f58/67b5bd9b9f58/6091340d35bc2de/'));
+        self::assertSame('/v1/test', Uri::sanitize('/v1/test', $uriMask));
+        self::assertSame('/v2/test/<XPTO>', Uri::sanitize('/v2/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7', $uriMask));
+        self::assertSame('/v3/test/<XPTO>/bar', Uri::sanitize('/v3/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/bar', $uriMask));
+        self::assertSame('/v4/test/<XPTO>/bar/<XPTO>/', Uri::sanitize('/v4/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/bar/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/', $uriMask));
+        self::assertSame('/v5/test/<XPTO>/<XPTO>', Uri::sanitize('/v5/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7', $uriMask));
+        self::assertSame('/v6/test/<XPTO>/<XPTO>/', Uri::sanitize('/v6/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/', $uriMask));
+        self::assertSame('/v7/test/<XPTO>/<XPTO>/<XPTO>', Uri::sanitize('/v7/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7', $uriMask));
+        self::assertSame('/v8/test/<XPTO>/<XPTO>/<XPTO>/', Uri::sanitize('/v8/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/', $uriMask));
     }
 }
