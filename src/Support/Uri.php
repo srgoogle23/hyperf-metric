@@ -18,6 +18,7 @@ final class Uri
     {
         return preg_replace(
             array_merge(
+                array_keys($uriMask),
                 [
                     '/\/(?<=\/)[ED]\d{8}\d{12}[0-9a-zA-Z]{11}(?=\/)?/',
                     '/\/(?<=\/)[a-f0-9]{40}(?=\/)?/i',
@@ -26,9 +27,9 @@ final class Uri
                     '/\/(?<=\/)[0-9A-F]{16,24}(?=\/)?/i',
                     '/\/(?<=\/)\d+(?=\/)?/',
                 ],
-                array_keys($uriMask)
             ),
             array_merge(
+                array_values($uriMask),
                 [
                     '/<E2E-ID>',
                     '/<SHA1>',
@@ -37,7 +38,6 @@ final class Uri
                     '/<OID>',
                     '/<NUMBER>',
                 ],
-                array_values($uriMask)
             ),
             '/' . ltrim($uri, '/'),
         );

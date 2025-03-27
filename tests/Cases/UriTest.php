@@ -136,16 +136,16 @@ final class UriTest extends TestCase
     public function testWithMaskParams(): void
     {
         $uriMask = [
-            '/[a-f0-9]+/i' => '/<XPTO>',
+            '/\/[a-f0-9]{64}/i' => '/<SHA256-ID>',
         ];
 
         self::assertSame('/v1/test', Uri::sanitize('/v1/test', $uriMask));
-        self::assertSame('/v2/test/<XPTO>', Uri::sanitize('/v2/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7', $uriMask));
-        self::assertSame('/v3/test/<XPTO>/bar', Uri::sanitize('/v3/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/bar', $uriMask));
-        self::assertSame('/v4/test/<XPTO>/bar/<XPTO>/', Uri::sanitize('/v4/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/bar/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/', $uriMask));
-        self::assertSame('/v5/test/<XPTO>/<XPTO>', Uri::sanitize('/v5/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7', $uriMask));
-        self::assertSame('/v6/test/<XPTO>/<XPTO>/', Uri::sanitize('/v6/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/', $uriMask));
-        self::assertSame('/v7/test/<XPTO>/<XPTO>/<XPTO>', Uri::sanitize('/v7/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7', $uriMask));
-        self::assertSame('/v8/test/<XPTO>/<XPTO>/<XPTO>/', Uri::sanitize('/v8/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/', $uriMask));
+        self::assertSame('/v2/test/<SHA256-ID>', Uri::sanitize('/v2/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7', $uriMask));
+        self::assertSame('/v3/test/<SHA256-ID>/bar', Uri::sanitize('/v3/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/bar', $uriMask));
+        self::assertSame('/v4/test/<SHA256-ID>/bar/<SHA256-ID>/', Uri::sanitize('/v4/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/bar/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/', $uriMask));
+        self::assertSame('/v5/test/<SHA256-ID>/<SHA256-ID>', Uri::sanitize('/v5/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7', $uriMask));
+        self::assertSame('/v6/test/<SHA256-ID>/<SHA256-ID>/', Uri::sanitize('/v6/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/', $uriMask));
+        self::assertSame('/v7/test/<SHA256-ID>/<SHA256-ID>/<SHA256-ID>', Uri::sanitize('/v7/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7', $uriMask));
+        self::assertSame('/v8/test/<SHA256-ID>/<SHA256-ID>/<SHA256-ID>/', Uri::sanitize('/v8/test/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/54cf575c04fdef4667094b6fc4fab8014dd3fa53576b644ec399452c43b5e7f7/', $uriMask));
     }
 }
